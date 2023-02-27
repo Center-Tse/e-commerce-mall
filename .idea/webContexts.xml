@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/web/jsp/admin/listOrder.jsp" value="file://$PROJECT_DIR$/web/jsp/admin" />
+        <entry key="file://$PROJECT_DIR$/web/jsp/admin/listProduct.jsp" value="file://$PROJECT_DIR$/web/jsp/admin" />
+        <entry key="file://$PROJECT_DIR$/web/jsp/include/product/productBottom.jsp" value="file://$PROJECT_DIR$/web/jsp/include/product" />
+      </map>
+    </option>
+  </component>
+</project>
