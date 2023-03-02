@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 
-/**
- * 本类会处理所有请求，在此分发Servlet方法
- */
+
 public class BackServletFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -77,7 +75,7 @@ public class BackServletFilter implements Filter {
             return;
         }
 
-        //配置不需登录即可访问的方法：
+
         String[] noNeedAuthPage = new String[]{
                 "home",
                 "checkLogin",
@@ -88,11 +86,11 @@ public class BackServletFilter implements Filter {
                 "loginIn",
                 "registerAdd",
                 "search"};
-        //如果uri根目录不含 "." (非资源)则统一交由前台处理
+
         if(!(uri.contains(".") || (uri.lastIndexOf('/')>0))){
             String servletPath = "front.servlet";
             String method = uri.substring(1);
-            if(method.equals("")) method = "home"; //缺省首页
+            if(method.equals("")) method = "home";
             request.setAttribute("method",method);
             boolean flag = false;
             for(String noNeedPage : noNeedAuthPage){
@@ -109,7 +107,7 @@ public class BackServletFilter implements Filter {
             return;
         }
 
-        //其他请求放行
+
         filterChain.doFilter(request,response);
     }
 

@@ -28,7 +28,6 @@ public class CommentService {
     public List<Comment> list(int pid, int start , int count){
         List<Comment> result = dao.list(pid,0,count);
         for(Comment c : result){
-            //使用户名变为匿名
             String name = c.getUser().getName();
             char[] chars = name.toCharArray();
             for(int i=1;i<chars.length-1;i++){

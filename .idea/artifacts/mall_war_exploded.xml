@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="S-mall-servlet-master:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/S_mall_servlet_master_war_exploded</output-path>
+  <artifact type="exploded-war" name="mall:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/mall_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="S-mall-servlet-master" />
+          <element id="module-output" name="mall" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="lib" />
@@ -16,7 +16,8 @@
           <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/standard.jar" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="S-mall-servlet-master/web/Web" />
+      <element id="library" level="project" name="mysql-connector-j-8.0.32" />
+      <element id="javaee-facet-resources" facet="mall/web/Web" />
     </root>
   </artifact>
 </component>

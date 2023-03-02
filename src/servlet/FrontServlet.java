@@ -124,7 +124,7 @@ public class FrontServlet extends BaseServlet {
     }
 
     public String buyOne(HttpServletRequest request, HttpServletResponse response) {
-        //客户下单，在session里面而不是在数据库里面注册一个cartItem项目，打上标示跳转到下单页面
+
         int pid = Integer.parseInt(request.getParameter("pid"));
         int num = Integer.parseInt(request.getParameter("num"));
         Product product = new ProductService().get(pid);
@@ -135,7 +135,7 @@ public class FrontServlet extends BaseServlet {
         cartItem.setNumber(num);
         cartItem.setSum(cartItem.getProduct().getNowPrice().multiply(new BigDecimal(cartItem.getNumber())));
         request.getSession().setAttribute("tempCartItem", cartItem);
-        return "@buy?ciid=-1"; //-1的话提醒buy页面从session取cartItem而不是从数据里面拿
+        return "@buy?ciid=-1";
     }
 
     public String buy(HttpServletRequest request, HttpServletResponse response) {
@@ -145,15 +145,15 @@ public class FrontServlet extends BaseServlet {
         BigDecimal total = new BigDecimal(0);
         for (String cartItemIdString : cartItemIdStrings) {
             int cartItemId = Integer.parseInt(cartItemIdString);
-            if (cartItemId == -1) {//点的是立即购买，从session里面拿cartItem
+            if (cartItemId == -1) {
                 CartItem cartItem = (CartItem) request.getSession().getAttribute("tempCartItem");
                 total = total.add(cartItem.getSum());
                 cartItem.setId(-1);
                 cartItems.add(cartItem);
                 break;
-            } else {//从购物车中来的
+            } else {
                 List<CartItem> userList = new CartItemService().listByUser(user.getId());
-                for(CartItem userItem:userList) { //判断是否是该用户的订单
+                for(CartItem userItem:userList) {
                     if(userItem.getId()==cartItemId) {
                         CartItem cartItem = new CartItemService().get(cartItemId);
                         total = total.add(cartItem.getSum());
@@ -170,18 +170,18 @@ public class FrontServlet extends BaseServlet {
     }
 
     public String addCart(HttpServletRequest request, HttpServletResponse response) {
-        //ajax请求加购物车
+
         int pid = Integer.parseInt(request.getParameter("pid"));
         int num = Integer.parseInt(request.getParameter("num"));
         Product product = new ProductService().get(pid);
         User user = (User) request.getSession().getAttribute("user");
         List<CartItem> cartItems = new CartItemService().listByUser(user.getId());
         boolean found = false;
-        //如果购物车中已经有相关项目就拿出来加数量，更新
+
         for (CartItem item : cartItems) {
             if (product.getId() == item.getProduct().getId()) {
                 int newNum = item.getNumber() + num;
-                //判断库存是否足够
+
                 if(product.getStock()<newNum){
                     return "%OutOfStock";
                 }
@@ -192,7 +192,7 @@ public class FrontServlet extends BaseServlet {
                 break;
             }
         }
-        //如果购物车里面没有相关项目新建一个
+
         if(!found) {
             CartItem cartItem = new CartItem();
             cartItem.setUser(user);
